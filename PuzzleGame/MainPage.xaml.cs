@@ -21,39 +21,23 @@ namespace PuzzleGame
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
     public sealed partial class MainPage : Page
-    {
-        private int numPieces = 1;
-        private Image[] allImages; // max images 10
+    { 
         private Piece[] piecesToMove;
-        private Piece[] targetPieces;
 
         public MainPage()
         {
+            if (Pieces.NUM_PIECES < 1 || Pieces.NUM_PIECES > 5)
+                throw new Exception("NUM_PIECES must be between 1 and 5");
+
             this.InitializeComponent();
 
-            allImages = new Image[10]{ piece1, piece2, piece3, piece4, piece5, piece6, piece7, piece8, piece9, piece10 };
-            piecesToMove = new Piece[numPieces / 2];
-            targetPieces = new Piece[numPieces / 2];
+            piecesToMove = new Piece[Pieces.NUM_PIECES];
 
-            int i = 0;
-
-            while (i < numPieces - 1)
+            for (int i = 0; i < Pieces.NUM_PIECES; i++)
             {
-                piecesToMove[i] = Pieces.NewPiece(rootLayout, allImages[i], true);
+                Piece target = Pieces.NewTargetPiece(rootLayout);
+                piecesToMove[i] = Pieces.NextPiece(rootLayout, target);
             }
-        }
-
-        private Piece FindPieceByImage(Image image)
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                if (allImages[i].Equals(image))
-                {
-                    return pieces[i];
-                }
-            }
-
-            return null;
         }
     }
 }

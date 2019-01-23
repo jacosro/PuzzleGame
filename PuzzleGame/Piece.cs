@@ -3,6 +3,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Shapes;
+using Windows.Foundation;
+using System.Diagnostics;
+using System;
 
 namespace PuzzleGame
 {
@@ -14,16 +17,24 @@ namespace PuzzleGame
         protected double Scale { get; set; }
         protected readonly bool IsTarget;
 
-        protected Shape Shape { get; set; }
+        protected Shape Shape;
         protected Piece Target;
 
-        protected CompositeTransform compositeTransform = new CompositeTransform();
+        protected CompositeTransform compositeTransform;
 
-        public Piece (Grid grid, Color color = Colors.Gray, bool isTarget = false, Piece target = null)
+        protected Piece (Grid grid, Point position, Color color, float orientation = 0, double scale = 1, bool isTarget = true, Piece target = null)
         {
-            Target = target;
+            PosX = position.X;
+            PosY = position.Y;
+
+            Orientation = orientation;
+            Scale = scale;
 
             IsTarget = isTarget;
+
+            Target = target;
+
+            InitializeShape();
 
             Shape.ManipulationMode = 
                 IsTarget 
@@ -35,21 +46,29 @@ namespace PuzzleGame
                     ? new SolidColorBrush(Colors.Gray)
                     : new SolidColorBrush(color);
 
-            Orientation = 0;
-            Scale = 1;
-
-            PosX = grid.ActualWidth / 2.0;
-            PosY = grid.ActualHeight * 2 / 3.0;
-
-            compositeTransform.TranslateX = PosX;
-            compositeTransform.TranslateY = PosY;
+            compositeTransform = new CompositeTransform
+            {
+                TranslateX = PosX,
+                TranslateY = PosY,
+                Rotation = Orientation,
+                ScaleX = Scale,
+                ScaleY = Scale
+            };
 
             Shape.RenderTransform = compositeTransform;
 
+            Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
+            Debug.WriteLine("Scale: " + Scale);
+            Debug.WriteLine("Rotation: " + Orientation);
+
+            Shape.ManipulationDelta += OnDelta;
+
             grid.Children.Add(Shape);
         }
+       
+        internal abstract void InitializeShape();
 
-        public void OnDelta(ManipulationDeltaRoutedEventArgs e)
+        public void OnDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             compositeTransform.CenterX = Shape.ActualWidth / 2.0;
             compositeTransform.CenterY = Shape.ActualHeight / 2.0;
@@ -61,7 +80,7 @@ namespace PuzzleGame
 
             compositeTransform.TranslateX += e.Delta.Translation.X;
             compositeTransform.TranslateY += e.Delta.Translation.Y;
-
+            
             PosX += e.Delta.Translation.X;
             PosY += e.Delta.Translation.Y;
 
@@ -70,6 +89,18 @@ namespace PuzzleGame
             Orientation += e.Delta.Rotation;
 
             Shape.RenderTransform = compositeTransform;
+
+            Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
+            Debug.WriteLine("Scale: " + Scale);
+            Debug.WriteLine("Rotation: " + Orientation);
+
+            if (IsOK())
+            {
+                Shape.ManipulationMode = ManipulationModes.None;
+
+                Shape.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                Target.Shape.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
         }
 
         public bool IsOK()
@@ -77,12 +108,14 @@ namespace PuzzleGame
             if (IsTarget)
                 return false;
 
-            return PosX == Target.PosX 
-                && PosY == Target.PosY 
-                && Scale == Target.Scale
-                && CheckOrientation();
+            int error = 5;
+
+            return Math.Abs(PosX - Target.PosX) < error
+                && Math.Abs(PosY - Target.PosY) < error
+                && Math.Abs(Scale - Target.Scale) < error
+                && CheckOrientation(Target.Orientation, error);
         }
 
-        protected abstract bool CheckOrientation();
+        internal abstract bool CheckOrientation(float targetOrientation, int error);
     }
 }
