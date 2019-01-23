@@ -35,6 +35,8 @@ namespace PuzzleGame
             levels.Add("1");
             levels.Add("2");
             levels.Add("3");
+            levels.Add("4");
+            levels.Add("5");
 
             comboBox.SelectedItem = "1";
 

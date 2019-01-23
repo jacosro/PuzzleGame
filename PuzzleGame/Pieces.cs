@@ -20,7 +20,7 @@ namespace PuzzleGame
         private const int PENTAGON = 3;
         private const int HEXAGON = 4;
 
-        private static readonly int[] PIECES = new int[5] { CIRCLE, SQUARE, TRIANGLE, PENTAGON, HEXAGON };
+        private static readonly int[] PIECES = new int[5] { CIRCLE, SQUARE, TRIANGLE, HEXAGON, PENTAGON };
 
         private static readonly Color[] COLORS = new Color[5] {
             Color.FromArgb(255, 255, 0, 0), // Red
@@ -90,8 +90,10 @@ namespace PuzzleGame
                     nextPiece = new Triangle(root, GetNextPiecePosition(), COLORS[index], isTarget: false, target: target);
                     break;
                 case PENTAGON:
+                    nextPiece = new Pentagon(root, GetNextPiecePosition(), COLORS[index], isTarget: false, target: target);
                     break;
                 case HEXAGON:
+                    nextPiece = new Hexagon(root, GetNextPiecePosition(), COLORS[index], isTarget: false, target: target);
                     break;
             }
 
@@ -145,8 +147,10 @@ namespace PuzzleGame
                     target = new Triangle(root, GetNextTargetPosition(), Colors.Gray, orientation: (float)Utils.RandomDouble(0, 360), scale: Utils.RandomDouble(0.5, 2.5));
                     break;
                 case PENTAGON:
+                    target = new Pentagon(root, GetNextTargetPosition(), Colors.Gray, orientation: (float)Utils.RandomDouble(0, 360), scale: Utils.RandomDouble(0.5, 2.5));
                     break;
                 case HEXAGON:
+                    target = new Hexagon(root, GetNextTargetPosition(), Colors.Gray, orientation: (float)Utils.RandomDouble(0, 360), scale: Utils.RandomDouble(0.5, 2.5));
                     break;
             }
 
