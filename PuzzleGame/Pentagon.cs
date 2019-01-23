@@ -48,11 +48,11 @@ namespace PuzzleGame
 
             PointCollection points = new PointCollection
             {
+                new Point(0, heightOfUnknownVertex),
                 new Point(50, 0), // top vertex
                 new Point(100, heightOfUnknownVertex),
                 new Point(75, 100),
-                new Point(25, 100),
-                new Point(0, heightOfUnknownVertex)
+                new Point(25, 100)
             };
 
             ((Polygon)Shape).Points = points;
