@@ -120,7 +120,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Circle.cs" />
+    <Compile Include="Hexagon.cs" />
     <Compile Include="OnPieceCompleteListener.cs" />
+    <Compile Include="Pentagon.cs" />
     <Compile Include="Pieces.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="MainPage.xaml.cs">

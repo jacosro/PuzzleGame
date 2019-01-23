@@ -64,10 +64,6 @@ namespace PuzzleGame
 
             Shape.RenderTransform = compositeTransform;
 
-            Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
-            Debug.WriteLine("Scale: " + Scale);
-            Debug.WriteLine("Rotation: " + Orientation);
-
             Shape.ManipulationDelta += OnDelta;
 
             grid.Children.Add(Shape);
@@ -96,10 +92,6 @@ namespace PuzzleGame
             Orientation += e.Delta.Rotation;
 
             Shape.RenderTransform = compositeTransform;
-
-            //Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
-            //Debug.WriteLine("Scale: " + Scale);
-            //Debug.WriteLine("Rotation: " + Orientation);
 
             if (IsOK())
             {

@@ -11,7 +11,7 @@
     <Grid x:ConnectionId='2' x:Name="rootLayout">
         <Button x:ConnectionId='3' x:Name="button" Content="Reload" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"              >
         </Button>
-        <TextBox x:ConnectionId='4' x:Name="textBox" HorizontalAlignment="Left" Margin="720,306,0,0" Text="Great!" VerticalAlignment="Top"/>
+        <TextBox x:ConnectionId='4' x:Name="textBox" HorizontalAlignment="Right" Margin="0,0,688,0" Text="Great!" VerticalAlignment="Center" Width="64"/>
         <TextBlock x:ConnectionId='5' x:Name="textBlock" HorizontalAlignment="Left" Margin="115,16,0,0" Text="Level:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <ComboBox x:ConnectionId='6' x:Name="comboBox" HorizontalAlignment="Left" Margin="180,10,0,0" VerticalAlignment="Top"                                                                           />
     </Grid>
