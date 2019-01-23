@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Shapes;
 using Windows.Foundation;
 using System.Diagnostics;
 using System;
+using Windows.UI.Xaml;
 
 namespace PuzzleGame
 {
@@ -15,6 +16,10 @@ namespace PuzzleGame
         protected double PosY { get; set; }
         protected float Orientation { get; set; }
         protected double Scale { get; set; }
+        private OnPieceCompleteListener OnPieceCompleteListener;
+
+        public Visibility Visibility { set => Shape.Visibility = value; }
+
         protected readonly bool IsTarget;
 
         protected Shape Shape;
@@ -102,6 +107,8 @@ namespace PuzzleGame
 
                 Shape.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                 Target.Shape.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+
+                OnPieceCompleteListener.OnPieceComplete(this);
             }
         }
 
@@ -120,5 +127,10 @@ namespace PuzzleGame
         }
 
         internal abstract bool CheckOrientation(float targetOrientation, int error);
+
+        public void SetOnPieceCompleteListener(OnPieceCompleteListener listener)
+        {
+            OnPieceCompleteListener = listener;
+        }
     }
 }

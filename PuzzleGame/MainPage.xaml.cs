@@ -20,9 +20,12 @@ namespace PuzzleGame
     /// <summary>
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
-    { 
+    public sealed partial class MainPage : Page, OnPuzzleCompleteListener
+    {
+        private Pieces pieces;
         private Piece[] piecesToMove;
+        private Piece[] targetPieces;
+        private TextBlock TextBlock;
 
         public MainPage()
         {
@@ -31,13 +34,54 @@ namespace PuzzleGame
 
             this.InitializeComponent();
 
+            Init();
+        }
+
+        private void Init()
+        {
+            pieces = Pieces.Instance;
+
             piecesToMove = new Piece[Pieces.NUM_PIECES];
+            targetPieces = new Piece[Pieces.NUM_PIECES];
 
             for (int i = 0; i < Pieces.NUM_PIECES; i++)
             {
-                Piece target = Pieces.NewTargetPiece(rootLayout);
-                piecesToMove[i] = Pieces.NextPiece(rootLayout, target);
+                targetPieces[i] = pieces.NewTargetPiece(rootLayout);
+                piecesToMove[i] = pieces.NextPiece(rootLayout, targetPieces[i]);
             }
+
+            // TextBlock to congratulate 
+
+            TextBlock = new TextBlock
+            {
+                Text = "Great!",
+                Width = 100,
+                Height = 20,
+                Visibility = Visibility.Collapsed
+            };
+
+            pieces.AddOnPuzzleCompleteListener(this);
+        }
+
+        public void OnComplete()
+        {
+            TextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            pieces.Reset();
+
+            for (int i = 0; i < piecesToMove.Length; i++)
+            {
+                Piece piece = piecesToMove[i];
+                Piece target = targetPieces[i];
+
+                piece.Visibility = Visibility.Collapsed;
+                target.Visibility = Visibility.Collapsed;
+            }
+
+            Init();
         }
     }
 }

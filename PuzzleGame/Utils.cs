@@ -14,5 +14,10 @@ namespace PuzzleGame
         {
             return Random.NextDouble() * (max - min) + min;
         }
+
+        public static int RandomInt(int min = 0, int max = 0)
+        {
+            return (int)RandomDouble(min, max);
+        }
     }
 }

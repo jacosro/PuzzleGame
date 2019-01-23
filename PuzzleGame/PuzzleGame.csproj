@@ -120,12 +120,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Circle.cs" />
+    <Compile Include="OnPieceCompleteListener.cs" />
     <Compile Include="Pieces.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OnPuzzleCompleteListener.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="Triangle.cs" />
     <Compile Include="Utils.cs" />

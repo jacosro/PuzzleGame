@@ -10,11 +10,18 @@ using Windows.UI.Xaml.Controls;
 
 namespace PuzzleGame
 { 
-    class Pieces
+    class Pieces : OnPieceCompleteListener
     {
         public const int NUM_PIECES = 3;
 
+        private const int CIRCLE = 0;
+        private const int SQUARE = 1;
+        private const int TRIANGLE = 2;
+        private const int PENTAGON = 3;
+        private const int HEXAGON = 4;
+
         private static readonly int[] PIECES = new int[5] { CIRCLE, SQUARE, TRIANGLE, PENTAGON, HEXAGON };
+
         private static readonly Color[] COLORS = new Color[5] {
             Color.FromArgb(255, 255, 0, 0), // Red
             Color.FromArgb(255, 0, 255, 0), // green
@@ -23,20 +30,51 @@ namespace PuzzleGame
             Color.FromArgb(255, 0, 255, 255), // light blue
         };
 
-        private static double NextX 
-        {
-            get => (Window.Current.Bounds.Width / 2 * -1) + (Window.Current.Bounds.Width * (index + 1) / (NUM_PIECES + 1)); // Position on window of the element based on the index
+        private static Pieces instance = null;
+
+        public static Pieces Instance { get
+            {
+                if (instance == null)
+                    instance = new Pieces();
+
+                return instance;
+            }
         }
 
-        private static int index = 0;
+        private int index = 0;
 
-        private const int CIRCLE = 0;
-        private const int SQUARE = 1;
-        private const int TRIANGLE = 2;
-        private const int PENTAGON = 3;
-        private const int HEXAGON = 4;
+        private readonly List<double> Positions;
+        private readonly List<double> TargetPositions;
 
-        public static Piece NextPiece(Grid root, Piece target)
+        private OnPuzzleCompleteListener PuzzleCompleteListener;
+
+        private int CompleteCount = 0;
+
+        private Pieces()
+        {
+            Positions = new List<double>(NUM_PIECES);
+            TargetPositions = new List<double>(NUM_PIECES);
+
+            for (int i = 0; i < NUM_PIECES; i++)
+            {
+                double pos = (Window.Current.Bounds.Width / 2 * -1) + (Window.Current.Bounds.Width * (i + 1) / (NUM_PIECES + 1)); // Position on window of the element based on the index
+
+                Positions.Add(pos);
+                TargetPositions.Add(pos);
+            }
+        }
+
+        public void AddOnPuzzleCompleteListener(OnPuzzleCompleteListener listener)
+        {
+            PuzzleCompleteListener = listener;
+        }
+
+        internal void Reset()
+        {
+            instance = new Pieces();
+        }
+
+        public Piece NextPiece(Grid root, Piece target)
         {
             Piece nextPiece = null;
 
@@ -57,14 +95,16 @@ namespace PuzzleGame
                     break;
             }
 
+            nextPiece.SetOnPieceCompleteListener(this);
+
             index = index == 4 ? 0 : ++index; // update index
 
             return nextPiece;
         }
 
-        private static Point GetNextPiecePosition()
+        private Point GetNextPiecePosition()
         {
-            double partitionX = NextX;
+            double partitionX = Positions[index];
             double partitionY = Window.Current.Bounds.Height / 4;
 
 
@@ -75,10 +115,12 @@ namespace PuzzleGame
             );
         }
 
-        private static Point GetNextTargetPosition()
+        private Point GetNextTargetPosition()
         {
-            double partitionX = NextX;
+            double partitionX = TargetPositions[Utils.RandomInt(0, TargetPositions.Count)];
             double partitionY = Window.Current.Bounds.Height / 4 * -1;
+
+            TargetPositions.Remove(partitionX);
 
             return new Point
             (
@@ -87,7 +129,7 @@ namespace PuzzleGame
             );
         }
 
-        public static Piece NewTargetPiece(Grid root)
+        public Piece NewTargetPiece(Grid root)
         {
             Piece target = null;
 
@@ -109,6 +151,14 @@ namespace PuzzleGame
             }
 
             return target;
+        }
+
+        public void OnPieceComplete(Piece piece)
+        {
+            if (++CompleteCount == NUM_PIECES)
+            {
+                PuzzleCompleteListener.OnComplete();
+            } 
         }
     }
 }
