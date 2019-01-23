@@ -12,7 +12,7 @@ namespace PuzzleGame
 { 
     class Pieces : OnPieceCompleteListener
     {
-        public const int NUM_PIECES = 3;
+        public static int numPieces = 2;
 
         private const int CIRCLE = 0;
         private const int SQUARE = 1;
@@ -52,12 +52,12 @@ namespace PuzzleGame
 
         private Pieces()
         {
-            Positions = new List<double>(NUM_PIECES);
-            TargetPositions = new List<double>(NUM_PIECES);
+            Positions = new List<double>(numPieces);
+            TargetPositions = new List<double>(numPieces);
 
-            for (int i = 0; i < NUM_PIECES; i++)
+            for (int i = 0; i < numPieces; i++)
             {
-                double pos = (Window.Current.Bounds.Width / 2 * -1) + (Window.Current.Bounds.Width * (i + 1) / (NUM_PIECES + 1)); // Position on window of the element based on the index
+                double pos = (Window.Current.Bounds.Width / 2 * -1) + (Window.Current.Bounds.Width * (i + 1) / (numPieces + 1)); // Position on window of the element based on the index
 
                 Positions.Add(pos);
                 TargetPositions.Add(pos);
@@ -155,7 +155,7 @@ namespace PuzzleGame
 
         public void OnPieceComplete(Piece piece)
         {
-            if (++CompleteCount == NUM_PIECES)
+            if (++CompleteCount == numPieces)
             {
                 PuzzleCompleteListener.OnComplete();
             } 

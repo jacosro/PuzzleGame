@@ -9,19 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="rootLayout">
-        <Button x:Name="button" Content="Reload" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Button_Click">
+        <Button x:Name="button" Content="Reload" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="Reset">
         </Button>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="720,306,0,0" Text="Great!" VerticalAlignment="Top"/>
-        <!--<Ellipse Height="100" Width="100" />-->
-        <!--<Image x:Name="piece1" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece2" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece3" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece4" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece5" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece6" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece7" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece8" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece9" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>
-        <Image x:Name="piece10" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Visibility="Collapsed"/>-->
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="115,16,0,0" Text="Level:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="180,10,0,0" VerticalAlignment="Top" ItemsSource="{x:Bind levels}" SelectionChanged="ComboBox_SelectionChanged"/>
     </Grid>
 </Page>

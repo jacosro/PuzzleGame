@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,13 +26,17 @@ namespace PuzzleGame
         private Pieces pieces;
         private Piece[] piecesToMove;
         private Piece[] targetPieces;
+        private ObservableCollection<string> levels = new ObservableCollection<string>();
 
         public MainPage()
         {
-            if (Pieces.NUM_PIECES < 1 || Pieces.NUM_PIECES > 5)
-                throw new Exception("NUM_PIECES must be between 1 and 5");
-
             this.InitializeComponent();
+
+            levels.Add("1");
+            levels.Add("2");
+            levels.Add("3");
+
+            comboBox.SelectedItem = "1";
 
             Init();
         }
@@ -40,16 +45,14 @@ namespace PuzzleGame
         {
             pieces = Pieces.Instance;
 
-            piecesToMove = new Piece[Pieces.NUM_PIECES];
-            targetPieces = new Piece[Pieces.NUM_PIECES];
+            piecesToMove = new Piece[Pieces.numPieces];
+            targetPieces = new Piece[Pieces.numPieces];
 
-            for (int i = 0; i < Pieces.NUM_PIECES; i++)
+            for (int i = 0; i < Pieces.numPieces; i++)
             {
                 targetPieces[i] = pieces.NewTargetPiece(rootLayout);
                 piecesToMove[i] = pieces.NextPiece(rootLayout, targetPieces[i]);
             }
-
-            // TextBlock to congratulate 
 
             textBox.Visibility = Visibility.Collapsed;
 
@@ -57,11 +60,11 @@ namespace PuzzleGame
         }
 
         public void OnComplete()
-        {
+        { 
             textBox.Visibility = Visibility.Visible;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Reset(object sender, RoutedEventArgs e)
         {
             pieces.Reset();
 
@@ -75,6 +78,12 @@ namespace PuzzleGame
             }
 
             Init();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Pieces.numPieces = comboBox.SelectedIndex + 1;
+            Reset(null, null);
         }
     }
 }
