@@ -14,8 +14,8 @@ namespace PuzzleGame
 
         internal override bool CheckOrientation(float targetOrientation, int error)
         {
-            float orientation = Orientation % 90;
-            float tOrientation = targetOrientation % 90;
+            float orientation = Math.Abs(Orientation) % 90;
+            float tOrientation = Math.Abs(targetOrientation) % 90;
 
             return Math.Abs(orientation - tOrientation) < error;
         }
