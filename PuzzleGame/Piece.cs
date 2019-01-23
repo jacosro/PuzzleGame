@@ -97,9 +97,9 @@ namespace PuzzleGame
 
             Shape.RenderTransform = compositeTransform;
 
-            Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
-            Debug.WriteLine("Scale: " + Scale);
-            Debug.WriteLine("Rotation: " + Orientation);
+            //Debug.WriteLine("PosX and PosY: " + new Point(PosX, PosY));
+            //Debug.WriteLine("Scale: " + Scale);
+            //Debug.WriteLine("Rotation: " + Orientation);
 
             if (IsOK())
             {
