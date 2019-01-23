@@ -20,7 +20,14 @@ namespace PuzzleGame
 
         internal override bool CheckOrientation(float targetOrientation, int error)
         {
-            float orientation = Orientation % 360;
+            float orientation = Orientation;
+
+            while (orientation < 0)
+            {
+                orientation += 360;
+            }
+
+            orientation = orientation % 360;
             float tOrientation = targetOrientation % 360;
 
             return Math.Abs(orientation - tOrientation) < error;

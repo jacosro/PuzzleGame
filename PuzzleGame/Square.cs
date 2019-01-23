@@ -15,14 +15,15 @@ namespace PuzzleGame
 
         internal override bool CheckOrientation(float targetOrientation, int error)
         {
-            Debug.WriteLine("orientation: " + Orientation);
-            Debug.WriteLine("target orientation: " + targetOrientation);
+            float orientation = Orientation;
 
-            float orientation = Orientation % 90;
+            while (orientation < 0)
+            {
+                orientation += 360;
+            }
+
+            orientation = orientation % 90;
             float tOrientation = targetOrientation % 90;
-
-            Debug.WriteLine("orientation modulo: " + orientation);
-            Debug.WriteLine("target orientation modulo: " + tOrientation);
 
             double calc = Math.Abs(orientation - tOrientation);
             return calc < error;
