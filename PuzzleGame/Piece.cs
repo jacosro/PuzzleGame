@@ -48,6 +48,8 @@ namespace PuzzleGame
 
             compositeTransform = new CompositeTransform
             {
+                CenterX = Shape.ActualWidth / 2.0,
+                CenterY = Shape.ActualHeight / 2.0,
                 TranslateX = PosX,
                 TranslateY = PosY,
                 Rotation = Orientation,
@@ -109,7 +111,7 @@ namespace PuzzleGame
                 return false;
 
             int error = 5;
-            double scaleError = 0.1;
+            double scaleError = 0.2;
 
             return Math.Abs(PosX - Target.PosX) < error
                 && Math.Abs(PosY - Target.PosY) < error
