@@ -109,10 +109,11 @@ namespace PuzzleGame
                 return false;
 
             int error = 5;
+            double scaleError = 0.1;
 
             return Math.Abs(PosX - Target.PosX) < error
                 && Math.Abs(PosY - Target.PosY) < error
-                && Math.Abs(Scale - Target.Scale) < error
+                && Math.Abs(Scale - Target.Scale) < scaleError
                 && CheckOrientation(Target.Orientation, error);
         }
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +14,10 @@ namespace PuzzleGame
 
         internal override bool CheckOrientation(float targetOrientation, int error)
         {
-            return false;
+            float orientation = Orientation % 90;
+            float tOrientation = targetOrientation % 90;
+
+            return Math.Abs(orientation - tOrientation) < error;
         }
 
         internal override void InitializeShape()
