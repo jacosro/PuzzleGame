@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2019-01-23T05:18:32.623</Modified>
+      <Modified>2019-01-23T05:30:28.929</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\PuzzleGame.exe">
       <PackagePath>entrypoint\PuzzleGame.exe</PackagePath>
-      <Modified>2019-01-23T05:18:32.325</Modified>
+      <Modified>2019-01-23T05:30:28.631</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -534,15 +534,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\PuzzleGame.xr.xml">
       <PackagePath>PuzzleGame.xr.xml</PackagePath>
-      <Modified>2019-01-23T05:10:58.655</Modified>
+      <Modified>2019-01-23T05:30:28.493</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2019-01-23T05:18:32.201</Modified>
+      <Modified>2019-01-23T05:30:28.498</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2019-01-23T05:18:32.201</Modified>
+      <Modified>2019-01-23T05:30:28.498</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17134.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -554,7 +554,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\jacos\source\repos\PuzzleGame\PuzzleGame\bin\x86\Debug\Core\PuzzleGame.exe">
       <PackagePath>PuzzleGame.exe</PackagePath>
-      <Modified>2019-01-23T05:18:32.619</Modified>
+      <Modified>2019-01-23T05:30:28.924</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

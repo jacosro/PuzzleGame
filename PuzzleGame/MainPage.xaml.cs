@@ -25,7 +25,6 @@ namespace PuzzleGame
         private Pieces pieces;
         private Piece[] piecesToMove;
         private Piece[] targetPieces;
-        private TextBlock TextBlock;
 
         public MainPage()
         {
@@ -52,20 +51,14 @@ namespace PuzzleGame
 
             // TextBlock to congratulate 
 
-            TextBlock = new TextBlock
-            {
-                Text = "Great!",
-                Width = 100,
-                Height = 20,
-                Visibility = Visibility.Collapsed
-            };
+            textBox.Visibility = Visibility.Collapsed;
 
             pieces.AddOnPuzzleCompleteListener(this);
         }
 
         public void OnComplete()
         {
-            TextBlock.Visibility = Visibility.Visible;
+            textBox.Visibility = Visibility.Visible;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
