@@ -27,11 +27,10 @@ namespace PuzzleGame
                 orientation += 360;
             }
 
-            orientation = orientation % 108; // ??
-            float tOrientation = targetOrientation % 108; // ??
+            orientation = orientation % 360;
+            float tOrientation = targetOrientation % 360;
 
-            double calc = Math.Abs(orientation - tOrientation);
-            return calc < error;
+            return Math.Abs(orientation - tOrientation) < error;
         }
 
         internal override void InitializeShape()
@@ -44,16 +43,16 @@ namespace PuzzleGame
 
             // Calculate left and right vertex
             int distanceFromTopVertexToCenter = 50;
-            double heightOfXVertex = distanceFromTopVertexToCenter * Math.Sin(54 * Math.PI / 180); // top angle / 2
+            double heightOfUnknownVertex = distanceFromTopVertexToCenter * Math.Sin(54 * Math.PI / 180); // (top angle / 2) in radians
 
 
             PointCollection points = new PointCollection
             {
                 new Point(50, 0), // top vertex
-                new Point(100, heightOfXVertex),
+                new Point(100, heightOfUnknownVertex),
                 new Point(75, 100),
                 new Point(25, 100),
-                new Point(0, heightOfXVertex)
+                new Point(0, heightOfUnknownVertex)
             };
 
             ((Polygon)Shape).Points = points;
