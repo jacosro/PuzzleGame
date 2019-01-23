@@ -109,7 +109,7 @@ namespace PuzzleGame
             if (IsTarget)
                 return false;
 
-            int error = 5;
+            int error = 3;
             double scaleError = 0.2;
 
             return Math.Abs(PosX - Target.PosX) < error

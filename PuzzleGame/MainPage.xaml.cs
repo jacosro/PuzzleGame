@@ -53,6 +53,10 @@ namespace PuzzleGame
             for (int i = 0; i < Pieces.numPieces; i++)
             {
                 targetPieces[i] = pieces.NewTargetPiece(rootLayout);
+            }
+
+            // Duplicate for loop to create target pieces first in order to keep move pieces always on top
+            for (int i = 0; i < Pieces.numPieces; i++) { 
                 piecesToMove[i] = pieces.NextPiece(rootLayout, targetPieces[i]);
             }
 
